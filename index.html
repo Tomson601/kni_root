@@ -3,90 +3,79 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="icon" href="static/favicon.png" type="image/png" />
-        <title>Koło Naukowe Informatyków - UPP</title>
-        <style>
-            body {
-                font-family: Arial, sans-serif;
-                margin: 0;
-                padding: 0;
-                background-color: #f4f4f4;
-            }
-            header {
-                background: #0073e6;
-                color: white;
-                padding: 20px;
-                text-align: center;
-            }
-            nav {
-                background: #005bb5;
-                padding: 15px;
-                text-align: center;
-            }
-            nav a {
-                color: white;
-                margin: 0 15px;
-                text-decoration: none;
-                font-weight: bold;
-            }
-            .container {
-                width: 80%;
-                margin: 20px auto;
-                background: white;
-                padding: 20px;
-                border-radius: 10px;
-            }
-            .section {
-                margin-bottom: 30px;
-            }
-            .image {
-                width: 100%;
-                border-radius: 10px;
-            }
-            footer {
-                background: #0073e6;
-                color: white;
-                text-align: center;
-                padding: 10px;
-            }
-        </style>
+        <title>Koło Naukowe Informatyków UPP</title>
+        <link rel="stylesheet" href="assets/css/style.css" />
     </head>
     <body>
         <header>
-            <h1>Koło Naukowe Informatyków - UPP</h1>
-            <p>Dołącz do nas!</p>
+            <h1>Koło Naukowe Informatyków UPP</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Strona główna</a></li>
+                    <li><a href="about.html">O nas</a></li>
+                    <li><a href="blog/index.html">Blog</a></li>
+                    <li><a href="contact.html">Kontakt</a></li>
+                </ul>
+            </nav>
         </header>
-        <nav>
-            <a href="#o-nas">O nas</a>
-            <a href="#projekty">Projekty</a>
-      
-            <a href="#kontakt">Kontakt</a>
-        </nav>
-        <div class="container">
-            <div id="o-nas" class="section">
-                <h2>O nas</h2>
-                <p>
-                    Koło Naukowe Informatyków Uniwersytety Przyrodniczego w Poznaniu to miejsce dla pasjonatów
-                    programowania, sztucznej inteligencji i nowych technologii.
-                </p>
-                
-            </div>
-            <div id="projekty" class="section">
-                <h2>Nasze Projekty</h2>
-                <p>Sekcja w realizacji.</p>
-                <img src="https://source.unsplash.com/800x400/?technology,innovation" class="image" alt="Technologia" />
 
-                
-            </div>
-           
-          
-            <div id="kontakt" class="section">
-                <h2>Kontakt</h2>
-                <p>Masz pytania? Skontaktuj się z nami pod adresem <strong>kniupp@proton.me</strong></p>
-            </div>
-        </div>
+        <main>
+            <section class="slider-section">
+                <div class="slider">
+                    <div class="slide active">
+                        <img src="assets/images/slider1.jpg" alt="Slajd 1" />
+                        <div class="caption">Warsztaty z Arduino</div>
+                    </div>
+                    <div class="slide">
+                        <img src="assets/images/slider2.jpg" alt="Slajd 2" />
+                        <div class="caption">Hackathon 2025</div>
+                    </div>
+                    <div class="slide">
+                        <img src="assets/images/slider3.jpg" alt="Slajd 3" />
+                        <div class="caption">Colonel Sanders</div>
+                    </div>
+                </div>
+                <div class="dots">
+                    <span class="dot active" data-index="0"></span>
+                    <span class="dot" data-index="1"></span>
+                    <span class="dot" data-index="2"></span>
+                </div>
+            </section>
+            <section>
+                <h2>Aktualności</h2>
+                <div id="latest-posts">
+                    <!-- Tu można dynamicznie (JS) wczytać ostatnie wpisy z blog/index.html -->
+                    <ul>
+                        <li>
+                            <a href="blog/2025-05-03-wyjazd-na-konferencje.html">Wyjazd na konferencję (TEST)</a>
+                            <em>(2025-05-03)</em>
+                        </li>
+                    </ul>
+                    <p><a href="blog/index.html">Zobacz wszystkie wpisy →</a></p>
+                </div>
+            </section>
+            <section>
+                <h2>Nasze Projekty</h2>
+                <ul>
+                    <li>BRAK</li>
+                    <li>BRAK</li>
+                    <li>BRAK</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Dołącz do nas!</h2>
+                <p>
+                    Jeśli interesujesz się programowaniem, elektroniką, drukiem 3D lub chcesz poznać innych pasjonatów
+                    technologii – zapraszamy!
+                </p>
+                <a href="contact.html" class="btn">Napisz do nas</a>
+            </section>
+        </main>
+
         <footer>
-            <p>&copy; 2025 Koło Naukowe Informatyków - UPP | Wszelkie prawa zastrzeżone</p>
+            <p>&copy;2025 Koło Naukowe Informatyków - UPP | Wszelkie prawa zastrzeżone</p>
         </footer>
+        <script src="script.js"></script>
     </body>
 </html>
