@@ -3,14 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>{{ title }}</title>
-    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="blog.css">
 </head>
 <body>
-    <header><a href="/blog/index.html">← Powrót do bloga</a></header>
+    <header>
+        
+        <h1>Blog Koła Naukowego Informatyków UPP</h1>
+        <nav>
+            <a href="index.html">← Powrót do bloga</a>
+        </nav>
+    </header>
+    <main>
     <article>
         <h1>{{ title }}</h1>
         <p><em>{{ date }}</em></p>
         {{ content|safe }}
     </article>
+    </main>
+    <footer>
+        <p>&copy;2025 Koło Naukowe Informatyków - UPP | Wszelkie prawa zastrzeżone</p>
+    </footer>
 </body>
 </html>
