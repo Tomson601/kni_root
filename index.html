@@ -1,26 +1,29 @@
 <!doctype html>
 <html lang="pl">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Koło Naukowe Informatyków UPP</title>
-        <link rel="stylesheet" href="assets/css/style.css" />
-    </head>
-    <body>
-        <header>
-            <h1>Koło Naukowe Informatyków UPP</h1>
-            <nav>
-                <ul>
-                    <li><a href="index.html" class="active">Strona główna</a></li>
-                    <li><a href="about.html">O nas</a></li>
-                    <li><a href="blog/index.html">Blog</a></li>
-                    <li><a href="contact.html">Kontakt</a></li>
-                </ul>
-            </nav>
-        </header>
 
-        <main>
-            <!-- <section class="slider-section">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Koło Naukowe Informatyków UPP</title>
+    <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+
+<body>
+    <header>
+        <h1>Koło Naukowe Informatyków UPP</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html" class="active">Strona główna</a></li>
+                <li><a href="about.html">O nas</a></li>
+                <li><a href="blog/index.html">Blog</a></li>
+                <li><a href="contact.html">Kontakt</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- STARA SEKCJA DO STAREGO SLIDERA NIE USUWAĆ MOŻE SIĘ PRZYDAĆ -->
+        <!-- <section class="slider-section">
                 <div class="slider">
                     <div class="slide active">
                         <img src="assets/images/slider1.jpg" alt="Slajd 1" />
@@ -42,45 +45,82 @@
                 </div>
             </section> -->
 
-            <section class="quiz_section">
-                <button class="quiz">QUIZ O<br> CYBERBEZPIECZEŃSTWIE</button>
-            </section>
-            
-            <section>
-                <h2>Aktualności</h2>
-                <div id="latest-posts">
-                    <!-- Tu można dynamicznie (JS) wczytać ostatnie wpisy z blog/index.html -->
-                    <ul>
-                        <li>
-                            <a href="blog/2025-05-03-wyjazd-na-konferencje.html">Wyjazd na konferencję (TEST)</a>
-                            <em>(2025-05-03)</em>
-                        </li>
-                    </ul>
-                    <p><a href="blog/index.html">Zobacz wszystkie wpisy →</a></p>
-                </div>
-            </section>
-            <section>
-                <h2>Nasze Projekty</h2>
-                <ul>
-                    <li>BRAK</li>
-                    <li>BRAK</li>
-                    <li>BRAK</li>
-                </ul>
-            </section>
+        <section class="quiz_section">
+            <button class="quiz">QUIZ O<br> CYBERBEZPIECZEŃSTWIE</button>
+        </section>
 
-            <section>
-                <h2>Dołącz do nas!</h2>
-                <p>
-                    Jeśli interesujesz się programowaniem, elektroniką, drukiem 3D lub chcesz poznać innych pasjonatów
-                    technologii – zapraszamy!
+        <section
+            style="background: #fffbe7; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); padding: 2em; margin-bottom: 2em; display: flex; align-items: center; gap: 2em;">
+            <img src="assets/images/spotkanie_otwarte.png" alt="Otwarte spotkanie KNI UPP"
+                style="max-width: 220px; width: 100%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.10);" />
+            <div style="font-size: 1.15em;">
+                <p style="margin-top:0; margin-bottom:1em;">🎉 <strong>Hej, Studenci!</strong></p>
+                <p style="margin:0 0 1em 0;">
+                    Chcecie dowiedzieć się, czym zajmuje się Koło Naukowe Informatyków UPP i poznać ludzi z pasją do IT?
+                    🚀<br>
+                    Zapraszamy na otwarte spotkanie — idealna okazja, żeby do nas dołączyć! 💻
                 </p>
-                <a href="contact.html" class="btn">Napisz do nas</a>
-            </section>
-        </main>
+                <ul style="list-style:none; padding:0; margin:0 0 1em 0;">
+                    <li>📅 <strong>20 października (poniedziałek)</strong></li>
+                    <li>🕕 <strong>18:30</strong></li>
+                    <li>📍 <strong>Katedra Inżynierii Biosystemów, ul. Wojska Polskiego 50, sala B4</strong></li>
+                </ul>
+                <p style="margin-bottom:0;">Do zobaczenia! 👋</p>
+            </div>
+        </section>
 
-        <footer>
-            <p>&copy;2025 Koło Naukowe Informatyków - UPP | Wszelkie prawa zastrzeżone</p>
-        </footer>
-        <script src="script.js"></script>
-    </body>
+        <section>
+            <h2>Aktualności</h2>
+            <div id="latest-posts">
+                <!-- Tu można dynamicznie (JS) wczytać ostatnie wpisy z blog/index.html -->
+                <ul>
+                    <li>
+                        <a href="blog/pfnis.html">Koło Naukowe Informatyków na Poznańskim Festiwalu Nauki i Sztuki</a>
+                        <em></em>
+                    </li>
+                    <li>
+                        <a href="blog/juwenalia_2025.html">Pochód Juwenaliowy UPP</a>
+                        <em></em>
+                    </li>
+                    <li>
+                        <a href="blog/hackaton2025.html">Hackathon</a>
+                        <em></em>
+                    </li>
+                </ul>
+                <p><a href="blog/index.html">Zobacz wszystkie wpisy →</a></p>
+            </div>
+        </section>
+
+        <!-- Sekcje a projektami, uzupełnić później -->
+        <!-- <section>
+            <h2>Nasze Projekty</h2>
+            <ul>
+                <li>BRAK</li>
+                <li>BRAK</li>
+                <li>BRAK</li>
+            </ul>
+        </section> -->
+
+        <section>
+            <h2>Dołącz do nas!</h2>
+            <p>
+                Jeśli interesujesz się programowaniem, elektroniką, drukiem 3D lub chcesz poznać innych pasjonatów
+                technologii – zapraszamy!
+            </p>
+            <a href="contact.html" class="btn">Napisz do nas</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy;2025 Koło Naukowe Informatyków - UPP | Wszelkie prawa zastrzeżone</p>
+    </footer>
+    <script src="script.js"></script>
+    <!-- Powiększane zdjęcie w modalu -->
+    <div id="img-modal"
+        style="display:none; position:fixed; z-index:1000; left:0; top:0; width:100vw; height:100vh; background:rgba(0,0,0,0.85); align-items:center; justify-content:center;">
+        <img id="modal-img" src="" alt="Powiększone zdjęcie"
+            style="max-width:90vw; max-height:90vh; border-radius:12px; box-shadow:0 4px 24px rgba(0,0,0,0.5);" />
+    </div>
+</body>
+
 </html>

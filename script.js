@@ -29,3 +29,29 @@ dots.forEach(dot => {
     showSlide(index);
   });
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    const quizBtn = document.querySelector('.quiz');
+    if (quizBtn) {
+        quizBtn.addEventListener('click', function() {
+            window.open('https://kniupp.pl/phishing_quiz/', '_blank');
+        });
+    }
+
+    const img = document.querySelector('img[alt="Otwarte spotkanie KNI UPP"]');
+    const modal = document.getElementById('img-modal');
+    const modalImg = document.getElementById('modal-img');
+
+    if (img && modal && modalImg) {
+        img.style.cursor = 'zoom-in';
+        img.addEventListener('click', function() {
+            modal.style.display = 'flex';
+            modalImg.src = img.src;
+        });
+        modal.addEventListener('click', function() {
+            modal.style.display = 'none';
+            modalImg.src = '';
+        });
+    }
+});
+
