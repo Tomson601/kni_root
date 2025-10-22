@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symulator bramek logicznych – KNI UPP</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        body { background: #181818; color: #fff; }
+        .toolbar {
+            background: #222;
+            padding: 1em;
+            display: flex;
+            gap: 1em;
+            justify-content: center;
+            border-radius: 8px;
+            margin-bottom: 1em;
+        }
+        .toolbar button {
+            background: #333;
+            color: #fff;
+            border: none;
+            padding: 0.7em 1.2em;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        .toolbar button.active {
+            background: #0077ff;
+        }
+        #board {
+            background: #111;
+            border-radius: 12px;
+            margin: 0 auto;
+            display: block;
+            box-shadow: 0 2px 16px #000a;
+        }
+        .gate-box { max-width:500px; margin:2em auto; background:#f4f8ff; border-radius:12px; box-shadow:0 2px 12px rgba(0,0,0,0.07); padding:2em; }
+        .gate-row { display:flex; align-items:center; gap:1em; margin-bottom:1em; }
+        .gate-label { min-width:80px; }
+        .gate-result { font-size:1.3em; font-weight:bold; margin-top:1em; }
+        select, input[type="checkbox"] { font-size:1.1em; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 style="text-align:center;">Symulator bramek logicznych</h1>
+        <nav style="text-align:center;">
+            <a href="index.html" style="color:#fff;">Strona główna</a> |
+            <a href="about.html" style="color:#fff;">O nas</a> |
+            <a href="blog/index.html" style="color:#fff;">Blog</a> |
+            <a href="contact.html" style="color:#fff;">Kontakt</a>
+        </nav>
+    </header>
+    <main>
+        <div class="toolbar">
+            <button data-gate="NOT">NOT</button>
+            <button data-gate="AND">AND</button>
+            <button data-gate="OR">OR</button>
+            <button data-gate="EXOR">EXOR</button>
+            <button data-gate="NAND">NAND</button>
+            <button data-gate="NOR">NOR</button>
+            <button data-gate="EXNOR">EXNOR</button>
+            <span style="margin-left:2em; color:#aaa;">Kliknij bramkę, potem kliknij na tablicy, aby ją dodać.</span>
+        </div>
+        <canvas id="board" width="1200" height="600"></canvas>
+        <div style="text-align:center; color:#aaa; margin-top:1em;">
+            Przeciągaj bramki myszką. Kliknij wejście/wyjście, aby połączyć bramki.<br>
+            <small>Demo – logika i połączenia można rozbudować!</small>
+        </div>
+    </main>
+    <footer>
+        <p style="text-align:center;">&copy;2025 Koło Naukowe Informatyków - UPP | Wszelkie prawa zastrzeżone</p>
+    </footer>
+    <script src="gate_sim.js"></script>
+</body>
+</html>
