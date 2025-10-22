@@ -13,6 +13,8 @@ let selectionRect = null; // {x1, y1, x2, y2}
 let multiSelectedGates = []; // indeksy zaznaczonych bramek
 
 let isSelecting = false;
+let draggingGroup = false;
+let dragGroupOffset = [];
 
 const gateTypes = {
     INPUT: { inputs: 0, outputs: 1 },
@@ -25,6 +27,15 @@ const gateTypes = {
     NOR: { inputs: 2, outputs: 1 },
     EXNOR: { inputs: 2, outputs: 1 }
 };
+
+function resizeCanvas() {
+    // Stały rozmiar planszy
+    canvas.width = 1200;
+    canvas.height = 700;
+    drawBoard();
+}
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
 
 function drawBoard() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -70,6 +81,10 @@ function drawBoard() {
 
 function drawGateSymbolic(gate, idx, isSelected) {
     ctx.save();
+    ctx.shadowBlur = 0;
+    ctx.fillStyle = "#222";      // jednolity kolor wnętrza
+    ctx.strokeStyle = "#fff";    // jednolity kolor obramowania
+    ctx.lineWidth = 2;
     ctx.translate(gate.x, gate.y);
 
     let w = GATE_WIDTH, h = GATE_HEIGHT;
@@ -99,8 +114,17 @@ function drawGateSymbolic(gate, idx, isSelected) {
             ctx.closePath();
             ctx.fill();
             ctx.stroke();
+            // Wyjście połączone z łukiem
+            const outX_AND = w * 0.55 + h / 2;
+            const outY_AND = h / 2;
+            ctx.beginPath();
+            ctx.moveTo(outX_AND, outY_AND);
+            ctx.lineTo(outX_AND + 15, outY_AND);
+            ctx.strokeStyle = "#fff";
+            ctx.lineWidth = 3;
+            ctx.stroke();
             break;
-        case 'OR':
+        case 'OR': {
             ctx.beginPath();
             ctx.moveTo(0, 0);
             ctx.quadraticCurveTo(w * 0.18, h / 2, 0, h);
@@ -111,7 +135,21 @@ function drawGateSymbolic(gate, idx, isSelected) {
             ctx.lineTo(0, h);
             ctx.stroke();
             ctx.fill();
+
+            // --- Wyjście od PRAWEJ krawędzi łuku ---
+            const outX = 120; // czubek bramki po lewej
+            const outY = h / 2;
+
+            ctx.beginPath();
+            ctx.moveTo(outX, outY);
+            ctx.lineTo(outX - 40, outY); // linia w lewo
+            ctx.strokeStyle = "#fff";
+            ctx.lineWidth = 3;
+            ctx.stroke();
+
             break;
+        }
+
         case 'NOT':
             ctx.beginPath();
             ctx.moveTo(0, 0);
@@ -182,11 +220,14 @@ function drawGateSymbolic(gate, idx, isSelected) {
             ctx.lineWidth = 3;
             ctx.stroke();
             break;
-        case 'EXOR':
+        case 'EXOR': {
+            // Dodatkowa linia z lewej strony (charakterystyczna dla EXOR)
             ctx.beginPath();
             ctx.moveTo(-14, 0);
             ctx.quadraticCurveTo(w * 0.09, h / 2, -14, h);
             ctx.stroke();
+
+            // Główna bramka
             ctx.beginPath();
             ctx.moveTo(0, 0);
             ctx.quadraticCurveTo(w * 0.18, h / 2, 0, h);
@@ -197,7 +238,21 @@ function drawGateSymbolic(gate, idx, isSelected) {
             ctx.lineTo(0, h);
             ctx.stroke();
             ctx.fill();
+
+            // --- Wyjście od LEWEJ krawędzi łuku ---
+            const outX = 120; // czubek bramki po lewej
+            const outY = h / 2;
+            const lineLength = 40;
+
+            ctx.beginPath();
+            ctx.moveTo(outX, outY);
+            ctx.lineTo(outX - lineLength, outY); // linia w lewo
+            ctx.strokeStyle = "#fff";
+            ctx.lineWidth = 3;
+            ctx.stroke();
+
             break;
+        }
         case 'EXNOR':
             ctx.beginPath();
             ctx.moveTo(-14, 0);
@@ -230,35 +285,63 @@ function drawGateSymbolic(gate, idx, isSelected) {
     }
 
     // --- Porty wejściowe/wyjściowe ---
-    const inputs = gateTypes[gate.type].inputs;
-    for (let i = 0; i < inputs; i++) {
-        let val = (gate.inputs && typeof gate.inputs[i] !== 'undefined') ? gate.inputs[i] : null;
+    if (gate.type !== 'INPUT' && gate.type !== 'OUTPUT') {
+        const inputs = gateTypes[gate.type].inputs;
+        for (let i = 0; i < inputs; i++) {
+            let val = (gate.inputs && typeof gate.inputs[i] !== 'undefined') ? gate.inputs[i] : null;
+            // Wyprowadzenie wejściowe (dłuższa linia pozioma)
+            let y = 15 + i * 30;
+            let xEnd = 0;
+            if (['OR', 'NOR', 'EXOR', 'EXNOR'].includes(gate.type)) {
+                xEnd = 18; // stała wartość, która dobrze wygląda dla łuków
+            }
+            // Dla reszty bramek (AND, NAND, NOT) zostaje xEnd = 0
+            ctx.beginPath();
+            ctx.moveTo(-30, y);
+            ctx.lineTo(xEnd, y);
+            ctx.strokeStyle = "#fff";
+            ctx.lineWidth = 3;
+            ctx.stroke();
+            // Kółko z wartością logiczną na końcu wyprowadzenia
+            ctx.beginPath();
+            ctx.arc(-30, y, 10, 0, 2 * Math.PI);
+            ctx.fillStyle = val === 1 ? "#0f0" : (val === 0 ? "#f00" : "#888");
+            ctx.fill();
+            ctx.strokeStyle = "#fff";
+            ctx.stroke();
+            // Wartość logiczna
+            ctx.fillStyle = "#fff";
+            ctx.font = "bold 15px monospace";
+            ctx.textAlign = "center";
+            ctx.fillText(val !== null ? val : "?", -30, y + 6);
+            ctx.font = "bold 12px monospace";
+            ctx.textAlign = "right";
+            ctx.fillText(i === 0 ? "A" : "B", -37, y - 10);
+        }
+        // Output port
+        let outVal = typeof gate.output !== 'undefined' ? gate.output : null;
+        let outX = (['NOT', 'NAND', 'NOR', 'EXNOR'].includes(gate.type)) ? w + 40 : w;
+        let outY = h / 2;
+        // Wyprowadzenie wyjściowe (linia)
         ctx.beginPath();
-        ctx.arc(0, 15 + i * 30, 10, 0, 2 * Math.PI);
-        ctx.fillStyle = val === 1 ? "#0f0" : (val === 0 ? "#f00" : "#888");
+        ctx.moveTo(outX, outY);
+        ctx.lineTo(outX + 15, outY);
+        ctx.strokeStyle = "#fff";
+        ctx.lineWidth = 3;
+        ctx.stroke();
+        // Kółko z wartością logiczną na końcu wyprowadzenia
+        ctx.beginPath();
+        ctx.arc(outX + 15, outY, 12, 0, 2 * Math.PI);
+        ctx.fillStyle = outVal === 1 ? "#0f0" : (outVal === 0 ? "#f00" : "#888");
         ctx.fill();
         ctx.strokeStyle = "#fff";
         ctx.stroke();
+        // Wartość logiczna
         ctx.fillStyle = "#fff";
         ctx.font = "bold 15px monospace";
-        ctx.fillText(val !== null ? val : "?", -22, 20 + i * 30);
-        ctx.font = "bold 12px monospace";
-        ctx.fillText(i === 0 ? "A" : "B", -22, 10 + i * 30);
+        ctx.textAlign = "center";
+        ctx.fillText(outVal !== null ? outVal : "?", outX + 15, outY + 6);
     }
-    // Output port
-    let outVal = typeof gate.output !== 'undefined' ? gate.output : null;
-    let outX = (['NOT', 'NAND', 'NOR', 'EXNOR'].includes(gate.type)) ? w + 40 : w;
-    ctx.beginPath();
-    ctx.arc(outX, h / 2, 10, 0, 2 * Math.PI);
-    ctx.fillStyle = outVal === 1 ? "#0f0" : (outVal === 0 ? "#f00" : "#888");
-    ctx.fill();
-    ctx.strokeStyle = "#fff";
-    ctx.stroke();
-    ctx.fillStyle = "#fff";
-    ctx.font = "bold 15px monospace";
-    ctx.fillText(outVal !== null ? outVal : "?", outX + 18, h / 2 + 6);
-    ctx.font = "bold 12px monospace";
-    ctx.fillText("OUT", outX + 18, h / 2 - 10);
 
     // --- INPUT/OUTPUT bloki ---
     if (gate.type === 'INPUT') {
@@ -289,17 +372,25 @@ function drawGateSymbolic(gate, idx, isSelected) {
         ctx.fillStyle = "#333";
         ctx.strokeStyle = "#fff";
         ctx.lineWidth = 2;
+        // Ramka wyjściowa
         ctx.beginPath();
         ctx.rect(0, 0, OUTPUT_WIDTH, OUTPUT_HEIGHT);
         ctx.fill();
         ctx.stroke();
+        // Napis OUT wyśrodkowany
         ctx.fillStyle = "#fff";
         ctx.font = "bold 16px monospace";
         ctx.textAlign = "center";
         ctx.fillText("OUT", OUTPUT_WIDTH / 2, OUTPUT_HEIGHT / 2 - 2);
-        ctx.fillStyle = gate.inputVal ? "#0f0" : "#f00";
+        // Wartość wyjściowa
+        ctx.fillStyle = gate.inputVal === 1 ? "#0f0" : "#f00";
         ctx.font = "bold 18px monospace";
-        ctx.fillText(typeof gate.inputVal !== 'undefined' ? (gate.inputVal ? "1" : "0") : "?", OUTPUT_WIDTH / 2, OUTPUT_HEIGHT / 2 + 18);
+        ctx.fillText(
+            typeof gate.inputVal !== 'undefined' ? (gate.inputVal ? "1" : "0") : "?",
+            OUTPUT_WIDTH / 2,
+            OUTPUT_HEIGHT / 2 + 18
+        );
+        // Kuleczka wejściowa (po lewej)
         ctx.beginPath();
         ctx.arc(0, OUTPUT_HEIGHT / 2, 10, 0, 2 * Math.PI);
         ctx.fillStyle = gate.inputVal === 1 ? "#0f0" : (gate.inputVal === 0 ? "#f00" : "#888");
@@ -329,6 +420,24 @@ function getPortPos(gate, port) {
 canvas.addEventListener('mousedown', e => {
     const { offsetX: mx, offsetY: my } = e;
     let clicked = false;
+    // Przesuwanie grupy jeśli kliknięto na jedną z zaznaczonych bramek
+    if (multiSelectedGates.length > 1) {
+        for (let idx of multiSelectedGates) {
+            const g = gates[idx];
+            let w = g.type === 'INPUT' ? INPUT_WIDTH : (g.type === 'OUTPUT' ? OUTPUT_WIDTH : GATE_WIDTH);
+            let h = g.type === 'INPUT' ? INPUT_HEIGHT : (g.type === 'OUTPUT' ? OUTPUT_HEIGHT : GATE_HEIGHT);
+            if (mx > g.x && mx < g.x + w && my > g.y && my < g.y + h) {
+                draggingGroup = true;
+                dragGroupOffset = multiSelectedGates.map(i => ({
+                    idx: i,
+                    dx: mx - gates[i].x,
+                    dy: my - gates[i].y
+                }));
+                clicked = true;
+                return;
+            }
+        }
+    }
     // Sprawdź, czy kliknięto na bramkę do przesuwania
     for (let i = gates.length - 1; i >= 0; i--) {
         const g = gates[i];
@@ -462,6 +571,15 @@ canvas.addEventListener('mousemove', e => {
         });
         drawBoard();
     }
+    if (draggingGroup) {
+        const { offsetX: mx, offsetY: my } = e;
+        dragGroupOffset.forEach(({ idx, dx, dy }) => {
+            gates[idx].x = mx - dx;
+            gates[idx].y = my - dy;
+        });
+        drawBoard();
+        return;
+    }
     if (draggingGate !== null) {
         const { offsetX: mx, offsetY: my } = e;
         let g = gates[draggingGate];
@@ -480,6 +598,7 @@ canvas.addEventListener('mouseup', e => {
         drawBoard();
     }
     draggingGate = null;
+    draggingGroup = false;
 });
 
 function distance(x1, y1, x2, y2) {
@@ -647,7 +766,7 @@ window.addEventListener('keydown', e => {
         // jeśli usunęliśmy bramkę o indeksie K, wszystkie indeksy większe od K powinny zostać zmniejszone o 1
         // zamiast komplikować, iterujemy przez wszystkie usunięte indeksy (rosnąco) i zmieniamy połączenia
         // NOTE: toDelete jest posortowane malejąco — utworzymy posortowaną rosnąco kopię:
-        const removed = [...toDelete].sort((a,b)=>a-b);
+        const removed = [...toDelete].sort((a, b) => a - b);
         connections.forEach(conn => {
             removed.forEach(removedIdx => {
                 if (conn.from.gate > removedIdx) conn.from.gate--;
