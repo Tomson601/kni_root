@@ -18,7 +18,12 @@
         </nav>
     </header>
     <main>
-        <div class="toolbar">
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <button data-gate="INPUT">INPUT</button>
+            <button data-gate="OUTPUT">OUTPUT</button>
+        </div>
+        <div class="toolbar-group">
             <button data-gate="NOT">NOT</button>
             <button data-gate="AND">AND</button>
             <button data-gate="OR">OR</button>
@@ -26,8 +31,14 @@
             <button data-gate="NAND">NAND</button>
             <button data-gate="NOR">NOR</button>
             <button data-gate="EXNOR">EXNOR</button>
-            <span class="toolbar-info">Kliknij bramkę, potem kliknij na tablicy, aby ją dodać.</span>
         </div>
+        <div class="toolbar-group">
+            <button id="save-btn">Zapisz</button>
+            <button id="load-btn">Wczytaj</button>
+            <input type="file" id="file-input" style="display:none" accept=".json">
+        </div>
+        <span class="toolbar-info">Kliknij bramkę, potem kliknij na tablicy, aby ją dodać.</span>
+    </div>
         <canvas id="board"></canvas>
     </main>
     <footer>

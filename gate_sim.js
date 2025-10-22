@@ -29,13 +29,53 @@ const gateTypes = {
 };
 
 function resizeCanvas() {
-    // Stały rozmiar planszy
-    canvas.width = 1200;
-    canvas.height = 700;
+    const board = document.getElementById('board');
+    board.width = board.clientWidth;
+    board.height = board.clientHeight;
     drawBoard();
 }
 window.addEventListener('resize', resizeCanvas);
 resizeCanvas();
+
+// --- ZAPIS ---
+document.getElementById('save-btn').addEventListener('click', () => {
+    const state = { gates, connections };
+    const blob = new Blob([JSON.stringify(state, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'symulator_bramek.json';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+});
+
+// --- WCZYTANIE ---
+document.getElementById('load-btn').addEventListener('click', () => {
+    document.getElementById('file-input').click();
+});
+document.getElementById('file-input').addEventListener('change', e => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = evt => {
+        try {
+            const state = JSON.parse(evt.target.result);
+            if (state.gates && state.connections) {
+                gates = state.gates;
+                connections = state.connections;
+                propagateSignals();
+                drawBoard();
+            } else {
+                alert("Nieprawidłowy plik!");
+            }
+        } catch (err) {
+            alert("Błąd podczas wczytywania pliku!");
+        }
+    };
+    reader.readAsText(file);
+});
 
 function drawBoard() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
