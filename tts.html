@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text-to-Speech – Koło Naukowe Informatyków UPP</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Text-to-Speech</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Strona główna</a></li>
+                <li><a href="about.html">O nas</a></li>
+                <li><a href="blog/index.html">Blog</a></li>
+                <li><a href="contact.html">Kontakt</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section style="max-width:700px; margin:2em auto; background:#f4f8ff; border-radius:12px; box-shadow:0 2px 12px rgba(0,0,0,0.07); padding:2em;">
+            <h2>Wprowadź tekst do przetworzenia</h2>
+
+            <form id="tts-form">
+                <label for="text-input">Tekst</label>
+                <textarea id="text-input" name="text" rows="10" style="width:100%; font-size:1.15em; resize:vertical; padding:1em; border-radius:8px; border:1px solid #bcd;" placeholder="Wpisz tekst tutaj..." required></textarea>
+
+                <label for="lang-select" style="margin-top:1em;">Język</label>
+                <select id="lang-select" name="lang" required style="width:100%; font-size:1.05em; padding:0.5em; border-radius:6px; border:1px solid #bcd;">
+                    <option value="pl">Polski (pl)</option>
+                    <option value="en" selected>Angielski (en)</option>
+                    <option value="de">Niemiecki (de)</option>
+                    <!-- dodaj inne języki jeśli potrzeba -->
+                </select>
+
+                <label for="slow-input" style="display:flex; align-items:center; gap:0.5em; margin-top:1em;">
+                    <input type="checkbox" id="slow-input" name="slow">
+                    Wolne mówienie (slow)
+                </label>
+
+                <div style="margin-top:1.25em;">
+                    <button type="submit" id="submit-btn" style="font-size:1.1em; padding:0.6em 1.5em; border-radius:6px;">Przetwórz na mowę</button>
+                    <button type="button" id="clear-btn" style="font-size:1.1em; padding:0.6em 1.5em; border-radius:6px;">Wyczyść</button>
+                </div>
+            </form>
+
+            <div id="result" style="margin-top:2em;">
+                <!-- audio + link pobierania pojawią się tutaj -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy;2025 Koło Naukowe Informatyków - UPP | Wszelkie prawa zastrzeżone</p>
+    </footer>
+
+    <script src="tts.js"></script>
+</body>
+</html>
