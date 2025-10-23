@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="pl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Text-to-Speech – Koło Naukowe Informatyków UPP</title>
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/tts.css">
+    <link rel="icon" href="static/favicon.png" type="image/x-icon">
 </head>
+
 <body>
     <header>
         <h1>Text-to-Speech</h1>
@@ -20,15 +23,19 @@
     </header>
 
     <main>
-        <section style="max-width:700px; margin:2em auto; background:#f4f8ff; border-radius:12px; box-shadow:0 2px 12px rgba(0,0,0,0.07); padding:2em;">
+        <section
+            style="max-width:1000px; margin:2em auto; background:#f4f8ff; border-radius:12px; box-shadow:0 2px 12px rgba(0,0,0,0.07); padding:2em;">
             <h2>Wprowadź tekst do przetworzenia</h2>
 
             <form id="tts-form">
                 <label for="text-input">Tekst</label>
-                <textarea id="text-input" name="text" rows="10" style="width:100%; font-size:1.15em; resize:vertical; padding:1em; border-radius:8px; border:1px solid #bcd;" placeholder="Wpisz tekst tutaj..." required></textarea>
+                <textarea id="text-input" name="text" rows="10"
+                    style="width:100%; font-size:1.15em; resize:vertical; padding:1em; border-radius:8px; border:1px solid #bcd;"
+                    placeholder="Wpisz tekst tutaj..." required></textarea>
 
                 <label for="lang-select" style="margin-top:1em;">Język</label>
-                <select id="lang-select" name="lang" required style="width:100%; font-size:1.05em; padding:0.5em; border-radius:6px; border:1px solid #bcd;">
+                <select id="lang-select" name="lang" required
+                    style="width:100%; font-size:1.05em; padding:0.5em; border-radius:6px; border:1px solid #bcd;">
                     <option value="pl">Polski (pl)</option>
                     <option value="en" selected>Angielski (en)</option>
                     <option value="de">Niemiecki (de)</option>
@@ -41,10 +48,21 @@
                 </label>
 
                 <div style="margin-top:1.25em;">
-                    <button type="submit" id="submit-btn" style="font-size:1.1em; padding:0.6em 1.5em; border-radius:6px;">Przetwórz na mowę</button>
-                    <button type="button" id="clear-btn" style="font-size:1.1em; padding:0.6em 1.5em; border-radius:6px;">Wyczyść</button>
+                    <button type="submit" id="submit-btn"
+                        style="font-size:1.1em; padding:0.6em 1.5em; border-radius:6px;">Przetwórz na mowę</button>
+                    <button type="button" id="clear-btn"
+                        style="font-size:1.1em; padding:0.6em 1.5em; border-radius:6px;">Wyczyść</button>
                 </div>
             </form>
+
+            <div id="progress-container"
+                style="width:100%; background:#e0e7ff; border-radius:8px; height:24px; margin-top:2em; display:none;">
+                <div id="progress-bar"
+                    style="height:100%; width:0%; background:#2546ff; border-radius:8px; transition:width 0.3s; position:relative;">
+                    <span id="progress-text"
+                        style="position:absolute; left:50%; top:0; transform:translateX(-50%); color:white; font-weight:bold; line-height:24px;">0%</span>
+                </div>
+            </div>
 
             <div id="result" style="margin-top:2em;">
                 <!-- audio + link pobierania pojawią się tutaj -->

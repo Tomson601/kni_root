@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symulator bramek logicznych – KNI UPP</title>
+    <link rel="stylesheet" href="gate_sim.css">
+    <link rel="icon" href="static/favicon.png" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <h1>Symulator bramek logicznych</h1>
+        <nav>
+            <a href="index.html">Strona główna</a> |
+            <a href="about.html">O nas</a> |
+            <a href="blog/index.html">Blog</a> |
+            <a href="contact.html">Kontakt</a>
+        </nav>
+    </header>
+    <main>
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <button data-gate="INPUT">INPUT</button>
+            <button data-gate="OUTPUT">OUTPUT</button>
+        </div>
+        <div class="toolbar-group">
+            <button data-gate="NOT">NOT</button>
+            <button data-gate="AND">AND</button>
+            <button data-gate="OR">OR</button>
+            <button data-gate="EXOR">EXOR</button>
+            <button data-gate="NAND">NAND</button>
+            <button data-gate="NOR">NOR</button>
+            <button data-gate="EXNOR">EXNOR</button>
+        </div>
+        <div class="toolbar-group">
+            <button id="save-btn">Zapisz</button>
+            <button id="load-btn">Wczytaj</button>
+            <input type="file" id="file-input" style="display:none" accept=".json">
+        </div>
+        <span class="toolbar-info">Kliknij bramkę, potem kliknij na tablicy, aby ją dodać.</span>
+    </div>
+        <canvas id="board"></canvas>
+    </main>
+    <footer>
+        <p>&copy;2025 Koło Naukowe Informatyków - UPP | Wszelkie prawa zastrzeżone</p>
+    </footer>
+    <script src="gate_sim.js"></script>
+</body>
+</html>
