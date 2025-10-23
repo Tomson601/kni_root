@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const clearBtn = document.getElementById('clear-btn');
 
   // Zmień na swój endpoint backendu
-  const API_URL = 'http://127.0.0.1:5000/tts';
+  const API_URL = 'https://kniupp.pl/api/tts/';
 
   clearBtn.addEventListener('click', () => {
     textInput.value = '';
