@@ -7,19 +7,25 @@
     <title>Text-to-Speech – Koło Naukowe Informatyków UPP</title>
     <link rel="stylesheet" href="assets/css/tts.css">
     <link rel="icon" href="static/favicon.png" type="image/x-icon">
+    <meta name="theme-color" content="#0f1724">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 </head>
 
 <body>
     <header>
-        <h1>Text-to-Speech</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Strona główna</a></li>
-                <li><a href="about.html">O nas</a></li>
-                <li><a href="blog/index.html">Blog</a></li>
-                <li><a href="contact.html">Kontakt</a></li>
-            </ul>
-        </nav>
+        <div class="container header-inner">
+            <a href="index.html" class="brand"><span class="logo" aria-hidden="true"></span>Text-to-Speech</a>
+            <nav class="nav" aria-label="Główne menu">
+                <button class="nav-toggle" aria-label="Otwórz menu" aria-expanded="false"><span class="hamburger"
+                    aria-hidden="true"></span></button>
+                <ul class="nav-list">
+                    <li><a href="index.html">Strona główna</a></li>
+                    <li><a href="about.html">O nas</a></li>
+                    <li><a href="blog/index.html">Blog</a></li>
+                    <li><a href="contact.html">Kontakt</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
     <main>
@@ -74,6 +80,7 @@
         <p>&copy;2025 Koło Naukowe Informatyków - UPP | Wszelkie prawa zastrzeżone</p>
     </footer>
 
+    <script src="assets/js/script.js"></script>
     <script src="tts.js"></script>
 </body>
 </html>

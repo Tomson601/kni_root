@@ -7,19 +7,31 @@
     <title>Koło Naukowe Informatyków UPP</title>
     <link rel="stylesheet" href="assets/css/style.css" />
     <link rel="icon" href="static/favicon.png" type="image/x-icon">
+    <meta name="theme-color" content="#0f1724">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 </head>
 
 <body>
     <header>
-        <h1>Koło Naukowe Informatyków UPP</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html" class="active">Strona główna</a></li>
-                <li><a href="about.html">O nas</a></li>
-                <li><a href="blog/index.html">Blog</a></li>
-                <li><a href="contact.html">Kontakt</a></li>
-            </ul>
+      <div class="container header-inner">
+        <a href="index.html" class="brand">
+          <img src="static/favicon.png" alt="KNI UPP" class="logo" />
+          Koło Naukowe Informatyków UPP
+        </a>
+
+        <nav class="nav" aria-label="Główne menu">
+          <button class="nav-toggle" aria-label="Otwórz menu" aria-expanded="false">
+            <span class="hamburger" aria-hidden="true"></span>
+          </button>
+          <ul class="nav-list">
+            <li><a href="index.html" class="active">Strona główna</a></li>
+            <li><a href="about.html">O nas</a></li>
+            <li><a href="blog/index.html">Blog</a></li>
+            <li><a href="contact.html">Kontakt</a></li>
+          </ul>
         </nav>
+      </div>
     </header>
 
     <main>
@@ -46,10 +58,6 @@
                 </div>
             </section> -->
 
-        <section class="quiz_section">
-            <button class="quiz">QUIZ O<br> CYBERBEZPIECZEŃSTWIE</button>
-        </section>
-
         <section
             style="background: #fffbe7; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); padding: 2em; margin-bottom: 2em; display: flex; align-items: center; gap: 2em;">
             <img src="assets/images/spotkanie_otwarte.png" alt="Otwarte spotkanie KNI UPP"
@@ -68,6 +76,10 @@
                 </ul>
                 <p style="margin-bottom:0;">Do zobaczenia! 👋</p>
             </div>
+        </section>
+
+        <section class="quiz_section">
+            <a class="quiz" href="https://kniupp.pl/phishing_quiz/" target="_blank" rel="noopener">QUIZ O<br> CYBERBEZPIECZEŃSTWIE</a>
         </section>
 
         <section>
@@ -136,7 +148,8 @@
     <footer>
         <p>&copy;2025 Koło Naukowe Informatyków - UPP | Wszelkie prawa zastrzeżone</p>
     </footer>
-    <script src="script.js"></script>
+    <!-- zmieniony skrypt na assets/js/script.js -->
+    <script src="assets/js/script.js"></script>
     <!-- Powiększane zdjęcie w modalu -->
     <div id="img-modal"
         style="display:none; position:fixed; z-index:1000; left:0; top:0; width:100vw; height:100vh; background:rgba(0,0,0,0.85); align-items:center; justify-content:center;">

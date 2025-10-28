@@ -6,46 +6,45 @@
   <title>Kontakt – Koło Naukowe Informatyków</title>
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="icon" href="static/favicon.png" type="image/x-icon">
+  <meta name="theme-color" content="#0f1724">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
   <header>
-    <h1>Koło Naukowe Informatyków UPP</h1>
-    <nav>
-      <ul>
-        <li><a href="index.html">Strona główna</a></li>
-        <li><a href="about.html">O nas</a></li>
-        <li><a href="blog/index.html">Blog</a></li>
-        <li><a href="contact.html" class="active">Kontakt</a></li>
-      </ul>
-    </nav>
+    <div class="container header-inner">
+      <a href="index.html" class="brand">
+        <img src="static/favicon.png" alt="KNI UPP" class="logo" />
+        Koło Naukowe Informatyków UPP
+      </a>
+
+      <nav class="nav" aria-label="Główne menu">
+        <button class="nav-toggle" aria-label="Otwórz menu" aria-expanded="false">
+          <span class="hamburger" aria-hidden="true"></span>
+        </button>
+        <ul class="nav-list">
+          <li><a href="index.html">Strona główna</a></li>
+          <li><a href="about.html">O nas</a></li>
+          <li><a href="blog/index.html">Blog</a></li>
+          <li><a href="contact.html" class="active">Kontakt</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
 
   <main>
-    <section class="contact-section">
+    <section class="contact-section container card reveal" style="margin-top:1.5rem;">
       <h2>Jak się z nami skontaktować?</h2>
       <p>Chętnie odpowiemy na wszystkie pytania dotyczące działalności koła.</p>
       <ul class="contact-list">
-        <li>
-          <strong>Facebook:</strong>
-          <a href="https://www.facebook.com/KNIUPP" target="_blank">www.facebook.com/KNIUPP</a>
-        </li>
-        <li>
-          <strong>E‑mail:</strong>
-          <a href="mailto:kniupp@proton.me">kniupp@proton.me</a>
-        </li>
+        <li><strong>Facebook:</strong> <a href="https://www.facebook.com/KNIUPP" target="_blank" rel="noopener">www.facebook.com/KNIUPP</a></li>
+        <li><strong>E‑mail:</strong> <a href="mailto:kniupp@proton.me">kniupp@proton.me</a></li>
       </ul>
 
       <h3>Zarząd Koła</h3>
       <ul class="team-list">
-        <li>
-          <strong>Prezes:</strong> Jan Szczepański
-        </li>
-        <li>
-          <strong>Wiceprezes:</strong> Tomasz Jarko
-        </li>
-        <li>
-          <strong>Sekretarz:</strong> Aleksandra Mazurek
-        </li>
+        <li><strong>Prezes:</strong> Jan Szczepański</li>
+        <li><strong>Wiceprezes:</strong> Tomasz Jarko</li>
+        <li><strong>Sekretarz:</strong> Aleksandra Mazurek</li>
       </ul>
     </section>
   </main>
@@ -53,5 +52,7 @@
   <footer>
     <p>&copy;2025 Koło Naukowe Informatyków - UPP | Wszelkie prawa zastrzeżone</p>
   </footer>
+
+  <script src="assets/js/script.js"></script>
 </body>
 </html>
