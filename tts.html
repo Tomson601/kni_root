@@ -5,68 +5,78 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Text-to-Speech – Koło Naukowe Informatyków UPP</title>
-    <link rel="stylesheet" href="assets/css/tts.css">
+    <link rel="stylesheet" href="assets/css/style.css">
     <link rel="icon" href="static/favicon.png" type="image/x-icon">
+    <meta name="theme-color" content="#0f1724">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 </head>
 
 <body>
     <header>
-        <h1>Text-to-Speech</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Strona główna</a></li>
-                <li><a href="about.html">O nas</a></li>
-                <li><a href="blog/index.html">Blog</a></li>
-                <li><a href="contact.html">Kontakt</a></li>
-            </ul>
-        </nav>
+        <div class="container header-inner">
+            <a href="index.html" class="brand">
+                <img src="static/favicon.png" alt="KNI UPP" class="logo" />
+                Koło Naukowe Informatyków UPP
+            </a>
+
+            <nav class="nav" aria-label="Główne menu">
+                <button class="nav-toggle" aria-label="Otwórz menu" aria-expanded="false">
+                    <span class="hamburger" aria-hidden="true"></span>
+                </button>
+                <ul class="nav-list">
+                    <li><a href="index.html">Strona główna</a></li>
+                    <li><a href="about.html">O nas</a></li>
+                    <li><a href="blog/index.html">Blog</a></li>
+                    <li><a href="contact.html">Kontakt</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
-    <main>
-        <section
-            style="max-width:1000px; margin:2em auto; background:#f4f8ff; border-radius:12px; box-shadow:0 2px 12px rgba(0,0,0,0.07); padding:2em;">
-            <h2>Wprowadź tekst do przetworzenia</h2>
+    <main class="container" style="padding-top:1.5rem;">
+        <section class="card reveal">
+            <h1>Text-to-Speech</h1>
+            <p class="muted">Wprowadź tekst poniżej, wybierz język i uruchom przetwarzanie na mowę.</p>
 
-            <form id="tts-form">
+            <form id="tts-form" style="margin-top:1rem;">
                 <label for="text-input">Tekst</label>
-                <textarea id="text-input" name="text" rows="10"
-                    style="width:100%; font-size:1.15em; resize:vertical; padding:1em; border-radius:8px; border:1px solid #bcd;"
-                    placeholder="Wpisz tekst tutaj..." required></textarea>
+                <textarea id="text-input" name="text" rows="8" placeholder="Wpisz tekst tutaj..." required
+                    style="width:100%; font-size:1.05rem; padding:0.85rem; border-radius:8px; border:1px solid #e6eefb;"></textarea>
 
-                <label for="lang-select" style="margin-top:1em;">Język</label>
-                <select id="lang-select" name="lang" required
-                    style="width:100%; font-size:1.05em; padding:0.5em; border-radius:6px; border:1px solid #bcd;">
-                    <option value="pl">Polski (pl)</option>
-                    <option value="en" selected>Angielski (en)</option>
-                    <option value="de">Niemiecki (de)</option>
-                    <!-- dodaj inne języki jeśli potrzeba -->
-                </select>
+                <div style="display:flex;gap:0.75rem;margin-top:0.75rem;flex-wrap:wrap;">
+                    <div style="flex:1;min-width:160px;">
+                        <label for="lang-select">Język</label>
+                        <select id="lang-select" name="lang" required
+                            style="width:100%; padding:0.5rem; border-radius:6px; border:1px solid #e6eefb;">
+                            <option value="pl">Polski (pl)</option>
+                            <option value="en" selected>Angielski (en)</option>
+                            <option value="de">Niemiecki (de)</option>
+                        </select>
+                    </div>
 
-                <label for="slow-input" style="display:flex; align-items:center; gap:0.5em; margin-top:1em;">
-                    <input type="checkbox" id="slow-input" name="slow">
-                    Wolne mówienie (slow)
-                </label>
+                    <div style="display:flex;align-items:center;gap:0.5rem;">
+                        <label for="slow-input" style="display:flex;align-items:center;gap:0.5rem;">
+                            <input type="checkbox" id="slow-input" name="slow">
+                            Wolne mówienie
+                        </label>
+                    </div>
+                </div>
 
-                <div style="margin-top:1.25em;">
-                    <button type="submit" id="submit-btn"
-                        style="font-size:1.1em; padding:0.6em 1.5em; border-radius:6px;">Przetwórz na mowę</button>
-                    <button type="button" id="clear-btn"
-                        style="font-size:1.1em; padding:0.6em 1.5em; border-radius:6px;">Wyczyść</button>
+                <div style="margin-top:1rem;display:flex;gap:0.6rem;flex-wrap:wrap;">
+                    <button type="submit" id="submit-btn" class="btn">Przetwórz na mowę</button>
+                    <button type="button" id="stop-btn" class="btn" style="background:#ef4444">Zatrzymaj</button>
+                    <button type="button" id="clear-btn" class="btn btn-secondary">Wyczyść</button>
                 </div>
             </form>
 
-            <div id="progress-container"
-                style="width:100%; background:#e0e7ff; border-radius:8px; height:24px; margin-top:2em; display:none;">
-                <div id="progress-bar"
-                    style="height:100%; width:0%; background:#2546ff; border-radius:8px; transition:width 0.3s; position:relative;">
-                    <span id="progress-text"
-                        style="position:absolute; left:50%; top:0; transform:translateX(-50%); color:white; font-weight:bold; line-height:24px;">0%</span>
+            <div id="progress-container" style="margin-top:1rem; display:none;">
+                <div id="progress-bar" style="width:100%; background:#e6eefb; border-radius:999px; height:14px; overflow:hidden;">
+                    <div id="progress-inner" style="height:100%; width:0%; background:linear-gradient(90deg,#2546ff,#06b6d4); transition:width 300ms;"></div>
                 </div>
+                <div id="progress-text" class="muted" style="margin-top:0.5rem; font-size:0.95rem;">Trwa odtwarzanie…</div>
             </div>
 
-            <div id="result" style="margin-top:2em;">
-                <!-- audio + link pobierania pojawią się tutaj -->
-            </div>
+            <div id="result" style="margin-top:1rem;"></div>
         </section>
     </main>
 
@@ -74,6 +84,7 @@
         <p>&copy;2025 Koło Naukowe Informatyków - UPP | Wszelkie prawa zastrzeżone</p>
     </footer>
 
+    <script src="assets/js/script.js"></script>
     <script src="tts.js"></script>
 </body>
 </html>
